@@ -1,8 +1,9 @@
 <section>
-    <div class="cr">
+    <div class="cr fixed-bottom bg-light">
         <div class="container">
             <div class="row">
-                <p>Copyright © <span id="cry">2017-2020</span>
+                <p class="text-center w-100 mb-0">
+                    Copyright © <span id="cry">2017-2020</span>
                     <a href="#!" target="_blank">Company.com</a> All rights reserved.
                 </p>
             </div>

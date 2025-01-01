@@ -14,7 +14,7 @@
                 </nav>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="max-height: 500px; overflow-y:scroll;">
             <div class="col-md-12">
                 <div class="box-com box-qui box-lig box-tab">
                     <div class="tit">

@@ -665,8 +665,8 @@ img {
 
 .main-head {
     border-bottom: 1px solid #e4e4e4;
-    padding-bottom: 15px;
-    margin-bottom: 40px;
+    padding-bottom: 1px;
+    margin-bottom: 8px;
 }
 
 .tit {}
@@ -1210,7 +1210,7 @@ img {
     box-shadow: rgb(51, 51, 51) 0px 1px 19px -17px;
     border-radius: 10px;
     width: 1138px;
-    padding: 50px;
+    padding: 15px;
 }
 
 .form-tit {
