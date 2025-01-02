@@ -116,7 +116,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-6">
                 <div class="box-com box-qui box-lig box-tab">
                     <div class="tit">
@@ -635,6 +635,6 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +19,14 @@ use App\Http\Controllers\Admin\AdminController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+
+Route::get('/login', [UserController::class, 'getlogin'])->name('login');
+Route::get('/sign-up', [UserController::class, 'getsignup'])->name('sign-up');
+Route::get('/about', [UserController::class, 'getabout'])->name('about');
+
 
 
 
