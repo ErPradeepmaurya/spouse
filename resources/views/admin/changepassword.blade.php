@@ -18,18 +18,33 @@
             <div class="col-md-12">
                 <div class="box-com box-qui box-lig box-form">
                     <div class="form-inp">
-                        <form>
-                            <!--PROFILE BIO-->
-                            <div class="edit-pro-parti">
-                                <div class="form-group">
-                                    <label class="lb">New Password:</label>
-                                    <input type="password" class="form-control" id="password"
-                                        placeholder="Enter New Password" name="password">
+                        <form method="post" action="{{ route('admin.updatePassword') }}">
+                            @csrf
+                            <div class="edit-pro-parti row">
+                                <div class="col-md-4 form-group">
+                                    <label class="lb">Old Password:</label>
+                                    <input type="password" class="form-control" name="old_password"
+                                        placeholder="Enter Old Password">
+                                    @error('old_password')
+                                        <div class="error-message text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                                <div class="form-group">
+                                <div class="col-md-4 form-group">
+                                    <label class="lb">New Password:</label>
+                                    <input type="password" class="form-control" name="password"
+                                        placeholder="Enter New Password">
+                                    @error('password')
+                                        <div class="error-message text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 form-group">
                                     <label class="lb">Confirm Password:</label>
-                                    <input type="password" class="form-control" id="pwd"
-                                        placeholder="Enter Confirm Password" name="c_password">
+                                    <input type="password" class="form-control" name="password_confirmation"
+                                        placeholder="Enter Confirm Password">
+                                    @error('password_confirmation')
+                                        <div class="error-message text-danger">The new password and confirm password do not
+                                            match.</div>
+                                    @enderror
                                 </div>
                             </div>
                             <button type="submit" class="cta-full cta-colr">Submit</button>

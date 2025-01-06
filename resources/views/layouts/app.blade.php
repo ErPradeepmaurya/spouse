@@ -8,15 +8,10 @@
 <body>
     <!-- Header -->
     @include('partials.navbar')
-
-
     <!-- Main Content -->
     @yield('content')
-
-
     <!-- Footer -->
     @include('partials.footer')
-
 </body>
 
 </html>

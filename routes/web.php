@@ -27,9 +27,6 @@ Route::get('/login', [UserController::class, 'getlogin'])->name('login');
 Route::get('/sign-up', [UserController::class, 'getsignup'])->name('sign-up');
 Route::get('/about', [UserController::class, 'getabout'])->name('about');
 
-
-
-
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AuthController::class, 'login'])->name('admin.login.submit');
@@ -38,8 +35,10 @@ Route::prefix('admin')->group(function () {
     Route::middleware('auth:admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/change-password', [AdminController::class, 'changepassword'])->name('admin.changepassword');
-        Route::get('/add-client', [AdminController::class, 'create_client'])->name('admin.add_client');
+        Route::post('/change-password', [AdminController::class, 'updatePassword'])->name('admin.updatePassword');
         Route::get('/clientlist', [AdminController::class, 'clientlist'])->name('admin.clientlist');
+        Route::get('/add-client', [AdminController::class, 'create_client'])->name('admin.add_client');
+        Route::post('/admin/storeclient', [AdminController::class, 'storeclient'])->name('admin.storeclient');
         Route::get('/user-list', [AdminController::class, 'userlist'])->name('admin.userlist');
         Route::get('/add-user', [AdminController::class, 'create_user'])->name('admin.add_user');
     });

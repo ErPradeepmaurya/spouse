@@ -33,7 +33,10 @@
 </html> --}}
 
 
+
+
 @include('admin.partials.headerLink')
+
 <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="rhs p-5 shadow rounded bg-white">
         <div class="form-tit text-center mb-4">
@@ -60,6 +63,13 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Sign in</button>
             </form>
+            <div class="mt-2">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif  
+            </div>
             @if ($errors->any())
                 <div class="text-danger fw-bold text-center mt-2">
                     @foreach ($errors->all() as $error)
