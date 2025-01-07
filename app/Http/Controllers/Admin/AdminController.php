@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Client;
-
-// use function Laravel\Prompts\password;
-
 use App\Models\Admin;
 
 class AdminController extends Controller
@@ -46,28 +43,73 @@ class AdminController extends Controller
     }
 
 
-    public function create_client()
+    // public function create_client()
+    // {
+    //     return view('admin.add_client');
+    // }
+
+    // public function clientlist()
+    // {
+    //     return view('admin.clientlist');
+    // }
+
+    public function create_client($id = null)
     {
-        return view('admin.add_client');
+        $client = null;
+
+        if ($id) {
+            // Fetch the client data for editing
+            $client = Client::findOrFail($id);
+        }
+
+        // Pass client data to the view (if editing) or null (if creating)
+        return view('admin.add_client', compact('client'));
     }
+
 
     public function clientlist()
     {
-        return view('admin.clientlist');
+        // Fetch all clients from the database
+        $clients = Client::all();
+
+        // Pass the data to the view
+        return view('admin.clientlist', compact('clients'));
     }
 
-    public function storeclient(Request $request)
+
+
+    public function storeClient(Request $request)
     {
-        // dd($request->all());
-        // Validate form data
-        $request->validate([
+        // Validate the request data
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:clients',
-            'phone' => 'nullable|numeric',
-            'pswd' => 'required|string|min:6',
+            'email' => 'required|email|unique:clients,email',
+            'phone' => 'required|numeric',
+            'gender' => 'required|string',
+            'password' => 'required|min:6',
+            'dob' => 'required|string|max:255',
+            'father_name' => 'required|string|max:255',
+            'mother_name' => 'nullable|string|max:255',
+            'country' => 'required|string|max:255',
+            'state' => 'nullable|string|max:255',
+            'city' => 'required|string|max:255',
+            'pin_code' => 'required|numeric',
+            'address' => 'required|string',
+            'job_type' => 'required|string',
+            'company_name' => 'required|string|max:255',
+            'salary' => 'nullable|numeric',
+            'experience' => 'nullable|numeric',
+            'degree' => 'nullable|string|max:255',
+            'whatsapp' => 'nullable|numeric',
+            'facebook' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'youtube' => 'nullable|url',
+            'linkedin' => 'nullable|url',
         ]);
+
         try {
-            // Create a new client record
+            // Create the client
             Client::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -95,11 +137,113 @@ class AdminController extends Controller
                 'linkedin' => $request->linkedin,
             ]);
 
-            // return redirect()->back()->with('success', 'Client data has been saved successfully!');
+            // Redirect with success message
+            return redirect()->route('admin.clientlist')->with('success', 'Client data has been saved successfully!');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+            // Redirect back with error message
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage())->withInput();
         }
     }
+
+
+    public function editClient($id)
+    {
+        // Find the client by ID
+        $client = Client::findOrFail($id);
+
+        // Return the edit view with the client data
+        return view('admin.editClient', compact('client'));
+    }
+
+
+    public function updateclient(Request $request, $id)
+    {
+        // dd($request->all());
+        $client = Client::findOrFail($id);
+
+        // Validate the request data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:clients,email,' . $client->id,
+            'phone' => 'required|numeric',
+            'gender' => 'required|string',
+            'dob' => 'required|string|max:255',
+            'father_name' => 'required|string|max:255',
+            'mother_name' => 'nullable|string|max:255',
+            'country' => 'required|string|max:255',
+            'state' => 'nullable|string|max:255',
+            'city' => 'required|string|max:255',
+            'pin_code' => 'required|numeric',
+            'address' => 'required|string',
+            'job_type' => 'required|string',
+            'company_name' => 'required|string|max:255',
+            'salary' => 'nullable|numeric',
+            'experience' => 'nullable|numeric',
+            'degree' => 'nullable|string|max:255',
+            'whatsapp' => 'nullable|numeric',
+            'facebook' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'youtube' => 'nullable|url',
+            'linkedin' => 'nullable|url',
+        ]);
+
+        try {
+            // Update the client data
+            $client->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'gender' => $request->gender,
+                'dob' => $request->dob,
+                'father_name' => $request->father_name,
+                'mother_name' => $request->mother_name,
+                'country' => $request->country,
+                'state' => $request->state,
+                'city' => $request->city,
+                'pin_code' => $request->pin_code,
+                'address' => $request->address,
+                'job_type' => $request->job_type,
+                'company_name' => $request->company_name,
+                'salary' => $request->salary,
+                'experience' => $request->experience,
+                'degree' => $request->degree,
+                'whatsapp' => $request->whatsapp,
+                'facebook' => $request->facebook,
+                'instagram' => $request->instagram,
+                'twitter' => $request->twitter,
+                'youtube' => $request->youtube,
+                'linkedin' => $request->linkedin,
+            ]);
+
+            // Redirect with success message
+            return redirect()->route('admin.clientlist')->with('success', 'Client data has been updated successfully!');
+        } catch (\Exception $e) {
+            // Redirect back with error message
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage())->withInput();
+        }
+    }
+
+    public function deleteClient($id)
+    {
+        try {
+            // Find the client by ID
+            $client = Client::findOrFail($id);
+
+            // Delete the client
+            $client->delete();
+
+            // Redirect to the client list page with a success message
+            return redirect()->route('admin.clientlist')->with('success', 'Client deleted successfully!');
+        } catch (\Exception $e) {
+            // Redirect back with an error message if something goes wrong
+            return redirect()->route('admin.clientlist')->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+    }
+
+
+
+
 
 
     public function userlist()

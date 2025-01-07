@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('gender')->nullable();
             $table->string('password');
-            $table->date('dob')->nullable();
+            $table->string('dob')->nullable();
             $table->string('father_name')->nullable();
             $table->string('mother_name')->nullable();
             $table->string('country')->nullable();

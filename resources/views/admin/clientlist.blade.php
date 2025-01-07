@@ -17,75 +17,84 @@
         <div class="row" style="max-height: 500px; overflow-y:scroll;">
             <div class="col-md-12">
                 <div class="box-com box-qui box-lig box-tab">
-                    <div class="tit">
-                        <h3>Join requests</h3>
-                        <p>New request profiles, waiting for admin approvals</p>
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown">
-                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="admin-settings.html#new-user-request">New user request
-                                        setting</a></li>
-                                <li><a class="dropdown-item" href="admin-settings.html#new-user-request">Approval
-                                        setting</a></li>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
                             </ul>
                         </div>
-                    </div>
+                    @endif
+
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Profile</th>
+                                <th>Name</th>
                                 <th>Phone</th>
-                                <th>Request date</th>
-                                <th>Request time</th>
-                                <th>Payment</th>
-                                <th>Plan type</th>
-                                <th>Approve</th>
+                                <th>Email</th>
+                                <th>Father Name</th>
+                                <th>Company Name</th>
                                 <th>More</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <div class="prof-table-thum">
-                                        <div class="pro">
-                                            <img src="../images/profiles/3.jpg" alt="">
-                                        </div>
-                                        <div class="pro-info">
-                                            <h5>Ashley emyy</h5>
-                                            <p>ashleyipsum@gmail.com</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>01 321-998-91</td>
-                                <td>22, Feb 2024</td>
-                                <td>10:30 AM</td>
-                                <td><span class="hig-blu">Paid</span></td>
-                                <td><span class="hig-grn">Premium</span></td>
-                                <td><span class="cta cta-grn">Approve</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Edit</a></li>
-                                            <li><a class="dropdown-item" href="#">Delete</a></li>
-                                            <li><a class="dropdown-item" href="#">Billing info</a></li>
-                                            <li><a class="dropdown-item" href="#">View more details</a></li>
-                                            <li><a class="dropdown-item" href="#">View profile</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                            @foreach ($clients as $index => $client)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td> <!-- Display the index + 1 as the number -->
+                                    <td>{{ $client->name }}</td> <!-- Client's name -->
+                                    <td>{{ $client->phone }}</td> <!-- Client's phone -->
+                                    <td>{{ $client->email }}</td> <!-- Client's email -->
+                                    <td>{{ $client->father_name }}</td> <!-- Client's father's name -->
+                                    <td>{{ $client->company_name }}</td> <!-- Client's company name -->
+                                    <td>
+                                        <a href="{{ route('admin.add_client', ['id' => $client->id]) }}"
+                                            class="cta cta-grn">Edit/Update</a>
 
+                                    </td>
+                                    <td>
+                                        <form id="delete-form-{{ $client->id }}"
+                                            action="{{ route('admin.deleteclient', $client->id) }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+
+                                        <button type="button" class="btn btn-danger text-light"
+                                            onclick="confirmDelete({{ $client->id }})">Delete</button>
+
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
     </div>
 @endsection()
+<script>
+    function confirmDelete(clientId) {
+        // Show SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If user confirms, submit the form to delete the client
+                document.getElementById('delete-form-' + clientId).submit();
+                Swal.fire('Deleted!', 'The client has been deleted.', 'success');
+            } else {
+                Swal.fire('Cancelled', 'Your client data is safe.', 'info');
+            }
+        });
+    }
+</script>

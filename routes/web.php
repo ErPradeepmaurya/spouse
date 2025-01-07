@@ -37,8 +37,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/change-password', [AdminController::class, 'changepassword'])->name('admin.changepassword');
         Route::post('/change-password', [AdminController::class, 'updatePassword'])->name('admin.updatePassword');
         Route::get('/clientlist', [AdminController::class, 'clientlist'])->name('admin.clientlist');
-        Route::get('/add-client', [AdminController::class, 'create_client'])->name('admin.add_client');
-        Route::post('/admin/storeclient', [AdminController::class, 'storeclient'])->name('admin.storeclient');
+        // Route::get('/add-client', [AdminController::class, 'create_client'])->name('admin.add_client');
+        Route::get('/add-client/{id?}', [AdminController::class, 'create_client'])->name('admin.add_client');
+        Route::post('/store-client', [AdminController::class, 'storeclient'])->name('admin.storeclient');
+        Route::put('/update-client/{id}', [AdminController::class, 'updateClient'])->name('admin.updateclient');
+        Route::delete('/delete-client/{id}', [AdminController::class, 'deleteClient'])->name('admin.deleteclient');
         Route::get('/user-list', [AdminController::class, 'userlist'])->name('admin.userlist');
         Route::get('/add-user', [AdminController::class, 'create_user'])->name('admin.add_user');
     });
