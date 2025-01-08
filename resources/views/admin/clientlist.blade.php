@@ -42,18 +42,16 @@
                         <tbody>
                             @foreach ($clients as $index => $client)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td> <!-- Display the index + 1 as the number -->
-                                    <td>{{ $client->name }}</td> <!-- Client's name -->
-                                    <td>{{ $client->phone }}</td> <!-- Client's phone -->
-                                    <td>{{ $client->email }}</td> <!-- Client's email -->
-                                    <td>{{ $client->father_name }}</td> <!-- Client's father's name -->
-                                    <td>{{ $client->company_name }}</td> <!-- Client's company name -->
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $client->name }}</td>
+                                    <td>{{ $client->phone }}</td>
+                                    <td>{{ $client->email }}</td>
+                                    <td>{{ $client->father_name }}</td>
+                                    <td>{{ $client->company_name }}</td>
                                     <td>
                                         <a href="{{ route('admin.add_client', ['id' => $client->id]) }}"
-                                            class="cta cta-grn">Edit/Update</a>
+                                            class="cta cta-grn">Edit</a>
 
-                                    </td>
-                                    <td>
                                         <form id="delete-form-{{ $client->id }}"
                                             action="{{ route('admin.deleteclient', $client->id) }}" method="POST"
                                             style="display: none;">
@@ -61,10 +59,11 @@
                                             @method('DELETE')
                                         </form>
 
-                                        <button type="button" class="btn btn-danger text-light"
-                                            onclick="confirmDelete({{ $client->id }})">Delete</button>
-
+                                        <button type="button" class="btn btn-danger text-light btn-sm"
+                                            onclick="confirmDelete({{ $client->id }})">Delete
+                                        </button>
                                     </td>
+
                                 </tr>
                             @endforeach
                         </tbody>

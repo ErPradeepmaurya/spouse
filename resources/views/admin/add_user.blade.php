@@ -18,201 +18,451 @@
             <div class="col-md-12">
                 <div class="box-com box-qui box-lig box-form">
                     <div class="form-inp">
-                        <form>
+                        <form action="{{ route('admin.store_user') }}" method="POST">
+                            @csrf
                             <!--PROFILE BIO-->
                             <div class="edit-pro-parti">
                                 <div class="form-tit">
-                                    <h4>Basic info</h4>
-                                    <h1>Edit my profile</h1>
+                                    <h1>Basic info</h1>
                                 </div>
-                                <div class="form-group">
-                                    <label class="lb">Name:</label>
-                                    <input type="text" class="form-control" placeholder="Enter your full name"
-                                        name="name">
-                                </div>
-                                <div class="form-group">
-                                    <label class="lb">Email:</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email"
-                                        name="email">
-                                </div>
-                                <div class="form-group">
-                                    <label class="lb">Phone:</label>
-                                    <input type="number" class="form-control" id="phone"
-                                        placeholder="Enter phone number" name="phone">
-                                </div>
-                                <div class="form-group">
-                                    <label class="lb">Password:</label>
-                                    <input type="password" class="form-control" id="pwd" placeholder="Enter password"
-                                        name="pswd">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Name:</label>
+                                            <input type="text" class="form-control" placeholder="Enter your full name"
+                                                name="name" value="{{ old('name') }}">
+                                            @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Email:</label>
+                                            <input type="email" class="form-control" id="email"
+                                                placeholder="Enter email" name="email">
+                                            @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Phone:</label>
+                                            <input type="number" class="form-control" id="phone"
+                                                placeholder="Enter phone number" name="phone">
+                                            @error('phone')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Password:</label>
+                                            <input type="password" class="form-control" id="pwd"
+                                                placeholder="Enter password" name="password">
+                                            @error('password')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Gender:</label>
+                                            <select class="form-select chosen-select" name="gender">
+                                                <option value="" disabled {{ old('gender') == '' ? 'selected' : '' }}>
+                                                    Select</option>
+                                                <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male
+                                                </option>
+                                                <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>
+                                                    Female</option>
+                                            </select>
+                                            @error('gender')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Date of birth:</label>
+                                            <input type="date" class="form-control" name="dob"
+                                                placeholder="Enter Your dob">
+                                            @error('dob')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Age:</label>
+                                            <input type="number" class="form-control" name="age"
+                                                placeholder="Enter Your Age">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Height:</label>
+                                            <input type="text" class="form-control" name="height"
+                                                placeholder="Enter Height">
+                                            @error('height')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Weight:</label>
+                                            <input type="text" class="form-control" name="weight"
+                                                placeholder="Enter Weight">
+                                            @error('weight')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Fathers name:</label>
+                                            <input type="text" class="form-control" name="fathers_name"
+                                                placeholder="Enter Fathers name">
+                                            @error('fathers_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Fathers Job type:</label>
+                                            <select class="form-select chosen-select" name="fathers_job">
+                                                <option value="" disabled
+                                                    {{ old('fathers_job') == '' ? 'selected' : '' }}>Select</option>
+                                                <option value="Business"
+                                                    {{ old('fathers_job') == 'Business' ? 'selected' : '' }}>Business
+                                                </option>
+                                                <option value="Employee"
+                                                    {{ old('fathers_job') == 'Employee' ? 'selected' : '' }}>Employee
+                                                </option>
+                                                <option value="Government"
+                                                    {{ old('fathers_job') == 'Government' ? 'selected' : '' }}>Government
+                                                </option>
+                                                <option value="Former"
+                                                    {{ old('fathers_job') == 'Former' ? 'selected' : '' }}>Former</option>
+                                                <option value="Jobless"
+                                                    {{ old('fathers_job') == 'Jobless' ? 'selected' : '' }}>Jobless
+                                                </option>
+                                            </select>
+                                            @error('fathers_job')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Mothers name:</label>
+                                            <input type="text" class="form-control" name="mothers_name"
+                                                placeholder="Enter Mothers Name">
+                                            @error('mothers_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Mothers Job type:</label>
+                                            <select class="form-select chosen-select" name="mothers_job">
+                                                <option value="" disabled
+                                                    {{ old('mothers_job') == '' ? 'selected' : '' }}>Select</option>
+                                                <option value="Business"
+                                                    {{ old('mothers_job') == 'Business' ? 'selected' : '' }}>Business
+                                                </option>
+                                                <option value="Employee"
+                                                    {{ old('mothers_job') == 'Employee' ? 'selected' : '' }}>Employee
+                                                </option>
+                                                <option value="Government"
+                                                    {{ old('mothers_job') == 'Government' ? 'selected' : '' }}>
+                                                    Government</option>
+                                                <option value="House Wife"
+                                                    {{ old('mothers_job') == 'House Wife' ? 'selected' : '' }}>House
+                                                    Wife
+                                                </option>
+                                                <option value="Jobless"
+                                                    {{ old('mothers_job') == 'Jobless' ? 'selected' : '' }}>Jobless
+                                                </option>
+                                            </select>
+                                            @error('mothers_job')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Total Family:</label>
+                                            <input type="text" class="form-control" name="total_family"
+                                                placeholder="Enter Total Family">
+                                            @error('total_family')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Total Brother:</label>
+                                            <input type="text" class="form-control" name="total_brother"
+                                                placeholder="Enter Total Brothers">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Total Sister:</label>
+                                            <input type="text" class="form-control" name="total_sister"
+                                                placeholder="Enter Total Sister">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!--END PROFILE BIO-->
                             <!--PROFILE BIO-->
                             <div class="edit-pro-parti">
                                 <div class="form-tit">
-                                    <h4>Basic info</h4>
-                                    <h1>Advanced bio</h1>
+                                    <h1>Address</h1>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label class="lb">Gender:</label>
-                                        <select class="form-select chosen-select" data-placeholder="Select your Gender">
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                        </select>
+                                    <div class="col-md-3 form-group">
+                                        <label class="lb">Country:</label>
+                                        <input type="text" class="form-control" name="country"
+                                            placeholder="Enter Country">
+                                        @error('country')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                    <div class="col-md-6 form-group">
+                                    <div class="col-md-3 form-group">
+                                        <label class="lb">State:</label>
+                                        <input type="text" name="state" placeholder="Enter State"
+                                            class="form-control">
+                                        @error('state')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-3 form-group">
                                         <label class="lb">City:</label>
-                                        <select class="form-select chosen-select" data-placeholder="Select your City">
-                                            <option>Chennai</option>
-                                            <option>Newyork</option>
-                                            <option>London</option>
-                                            <option>Chicago</option>
-                                        </select>
+                                        <input type="text" name="city" placeholder="Enter City"
+                                            class="form-control">
+                                        @error('city')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label class="lb">Date of birth:</label>
-                                        <input type="text" class="form-control">
+                                    <div class="col-md-3 form-group">
+                                        <label class="lb">Pin Code:</label>
+                                        <input type="text" name="pin_code" placeholder="Enter Pin Code"
+                                            class="form-control">
+                                        @error('pin_code')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                    <div class="col-md-6 form-group">
-                                        <label class="lb">Age:</label>
-                                        <input type="number" class="form-control">
+                                    <div class="form-group">
+                                        <label class="lb">Address:</label>
+                                        <input type="text" class="form-control" name="address"
+                                            placeholder="Enter Address">
+                                        @error('address')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label class="lb">Height:</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <label class="lb">Weight:</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label class="lb">Fathers name:</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <label class="lb">Mothers name:</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="lb">Address:</label>
-                                    <input type="text" class="form-control">
                                 </div>
                             </div>
+                            {{-- </div> --}}
                             <!--END PROFILE BIO-->
                             <!--PROFILE BIO-->
                             <div class="edit-pro-parti">
                                 <div class="form-tit">
-                                    <h4>Job details</h4>
                                     <h1>Job & Education</h1>
                                 </div>
-                                <div class="form-group">
-                                    <label class="lb">Job type:</label>
-                                    <select class="form-select chosen-select" data-placeholder="Select your Hobbies">
-                                        <option>Business</option>
-                                        <option>Employee</option>
-                                        <option>Government</option>
-                                        <option>Jobless</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="lb">Company name:</label>
-                                    <input type="text" class="form-control">
-                                </div>
                                 <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label class="lb">Salary:</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <label class="lb">Job total experience:</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Job type:</label>
 
-                                <div class="form-group">
-                                    <label class="lb">Degree:</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label class="lb">School:</label>
-                                        <input type="text" class="form-control">
+                                            <select class="form-select chosen-select" name="job_type">
+                                                <option value="" disabled
+                                                    {{ old('job_type') == '' ? 'selected' : '' }}>
+                                                    Select</option>
+                                                <option value="Business"
+                                                    {{ old('job_type') == 'Business' ? 'selected' : '' }}>
+                                                    Business
+                                                </option>
+                                                <option value="Employee"
+                                                    {{ old('job_type') == 'Employee' ? 'selected' : '' }}>
+                                                    Employee
+                                                </option>
+                                                <option value="Government"
+                                                    {{ old('job_type') == 'Government' ? 'selected' : '' }}>Government
+                                                </option>
+                                                <option value="Former"
+                                                    {{ old('job_type') == 'Former' ? 'selected' : '' }}>
+                                                    Former</option>
+                                                <option value="Jobless"
+                                                    {{ old('job_type') == 'Jobless' ? 'selected' : '' }}>
+                                                    Jobless
+                                                </option>
+                                            </select>
+                                            @error('job_type')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 form-group">
-                                        <label class="lb">College:</label>
-                                        <input type="text" class="form-control">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Company name:</label>
+                                            <input type="text" class="form-control" name="company_name"
+                                                placeholder="Enter Company Name">
+                                            @error('company_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Salary / Annual</label>
+                                            <input type="text" class="form-control" name="salary"
+                                                placeholder="Enter Salary">
+                                            @error('salary')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Job total experience:</label>
+                                            <input type="text" class="form-control" name="experience"
+                                                placeholder="Enter Experience">
+                                            @error('experience')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">Degree:</label>
+                                            <input type="text" class="form-control" name="degree"
+                                                placeholder="Enter Degree Name">
+                                            @error('degree')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">College:</label>
+                                            <input type="text" class="form-control" name="college"
+                                                placeholder="Enter College Name">
+                                            @error('college')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label class="lb">School:</label>
+                                            <input type="text" class="form-control" name="school"
+                                                placeholder="Enter School Name">
+                                            @error('school')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label class="lb">Hobbies:</label>
+                                                <select class="form-select" name="hobbies">
+                                                    <option value="" disabled
+                                                        {{ old('hobbies') == '' ? 'selected' : '' }}>
+                                                        Select</option>
+                                                    <option value="Modelling"
+                                                        {{ old('hobbies') == 'Modelling' ? 'selected' : '' }}>
+                                                        Modelling
+                                                    </option>
+                                                    <option value="Watching"
+                                                        {{ old('hobbies') == 'Watching' ? 'selected' : '' }}>
+                                                        Watching
+                                                    </option>
+                                                    <option value="movies"
+                                                        {{ old('hobbies') == 'movies' ? 'selected' : '' }}>
+                                                        movies</option>
+                                                    <option value="Playing"
+                                                        {{ old('hobbies') == 'Playing' ? 'selected' : '' }}>
+                                                        Playing
+                                                    </option>
+                                                    <option value="volleyball"
+                                                        {{ old('hobbies') == 'volleyball' ? 'selected' : '' }}>
+                                                        volleyball
+                                                    </option>
+                                                    <option value="Hangout with family"
+                                                        {{ old('hobbies') == 'Hangout with family' ? 'selected' : '' }}>
+                                                        Hangout with family</option>
+                                                    <option value="Adventure travel"
+                                                        {{ old('hobbies') == 'Adventure travel' ? 'selected' : '' }}>
+                                                        Adventure travel</option>
+                                                    <option value="Books reading"
+                                                        {{ old('hobbies') == 'Books reading' ? 'selected' : '' }}>Books
+                                                        reading</option>
+                                                    <option value="Music"
+                                                        {{ old('hobbies') == 'Music' ? 'selected' : '' }}>Music
+                                                    </option>
+                                                    <option value="Cooking"
+                                                        {{ old('hobbies') == 'Cooking' ? 'selected' : '' }}>
+                                                        Cooking
+                                                    </option>
+                                                    <option value="Yoga"
+                                                        {{ old('hobbies') == 'Yoga' ? 'selected' : '' }}>Yoga
+                                                    </option>
+                                                </select>
+                                                @error('hobbies')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <!--END PROFILE BIO-->
                             <!--PROFILE BIO-->
                             <div class="edit-pro-parti">
                                 <div class="form-tit">
-                                    <h4>Media</h4>
                                     <h1>Social media</h1>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6 form-group">
+                                    <div class="col-md-4 form-group">
                                         <label class="lb">WhatsApp:</label>
-                                        <input type="text" class="form-control">
+                                        <input type="url" class="form-control" name="whatsapp"
+                                            placeholder="Enter WhatsApp Link">
                                     </div>
-                                    <div class="col-md-6 form-group">
+                                    <div class="col-md-4 form-group">
                                         <label class="lb">Facebook:</label>
-                                        <input type="text" class="form-control">
+                                        <input type="url" class="form-control" name="facebook"
+                                            placeholder="Enter Facebook Link">
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
+
+                                    <div class="col-md-4 form-group">
                                         <label class="lb">Instagram:</label>
-                                        <input type="text" class="form-control">
+                                        <input type="url" class="form-control" name="instagram"
+                                            placeholder="Enter Instagram Link">
                                     </div>
-                                    <div class="col-md-6 form-group">
-                                        <label class="lb">X:</label>
-                                        <input type="text" class="form-control">
+                                    <div class="col-md-4 form-group">
+                                        <label class="lb">X (Twitter):</label>
+                                        <input type="url" class="form-control" name="x"
+                                            placeholder="Enter X (Twitter) Link">
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
+
+                                    <div class="col-md-4 form-group">
                                         <label class="lb">Youtube:</label>
-                                        <input type="text" class="form-control">
+                                        <input type="url" class="form-control" name="youtube"
+                                            placeholder="Enter YouTube Link">
                                     </div>
-                                    <div class="col-md-6 form-group">
+                                    <div class="col-md-4 form-group">
                                         <label class="lb">Linkedin:</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <!--END PROFILE BIO-->
-                            <!--PROFILE BIO-->
-                            <div class="edit-pro-parti">
-                                <div class="form-tit">
-                                    <h4>interests</h4>
-                                    <h1>Hobbies</h1>
-                                </div>
-                                <div class="chosenini">
-                                    <div class="form-group">
-                                        <select class="chosen-select" data-placeholder="Select your Hobbies" multiple>
-                                            <option></option>
-                                            <option>Modelling </option>
-                                            <option>Watching </option>
-                                            <option>movies </option>
-                                            <option>Playing </option>
-                                            <option>volleyball</option>
-                                            <option>Hangout with family </option>
-                                            <option>Adventure travel </option>
-                                            <option>Books reading </option>
-                                            <option>Music </option>
-                                            <option>Cooking </option>
-                                            <option>Yoga</option>
-                                        </select>
+                                        <input type="url" class="form-control" name="linkedin"
+                                            placeholder="Enter Linkedin Link">
                                     </div>
                                 </div>
                             </div>

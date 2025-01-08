@@ -42,7 +42,9 @@ Route::prefix('admin')->group(function () {
         Route::post('/store-client', [AdminController::class, 'storeclient'])->name('admin.storeclient');
         Route::put('/update-client/{id}', [AdminController::class, 'updateClient'])->name('admin.updateclient');
         Route::delete('/delete-client/{id}', [AdminController::class, 'deleteClient'])->name('admin.deleteclient');
+        Route::get('/add-user', [AdminController::class, 'createUser'])->name('admin.add_user');
+        Route::post('/store-user', [AdminController::class, 'storeUser'])->name('admin.store_user');
+
         Route::get('/user-list', [AdminController::class, 'userlist'])->name('admin.userlist');
-        Route::get('/add-user', [AdminController::class, 'create_user'])->name('admin.add_user');
     });
 });
