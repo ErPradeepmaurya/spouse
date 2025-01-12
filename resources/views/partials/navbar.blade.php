@@ -15,7 +15,7 @@
                 <div class="hom-nav">
                     <!-- LOGO -->
                     <div class="logo">
-                        <a href="" class="logo-brand">
+                        <a href="{{ route('index') }}" class="logo-brand">
                             <img src="images/logo/Spouse-Logo.png" alt="" loading="lazy" class="ic-logo">
                         </a>
                     </div>
@@ -29,49 +29,30 @@
                                         <div class="row">
                                             <div class="multi-col">
                                                 <div class="inn">
-                                                    <h4>Page sets 1</h4>
                                                     <ul>
-                                                        <li><a href="all-profiles.html">All profiles</a></li>
-                                                        <li><a href="profile-details.html">Profile details</a></li>
-                                                        <li><a href="wedding.html">Wedding</a></li>
-                                                        <li><a href="wedding-video.html">Wedding video</a></li>
-                                                        <li><a href="services.html">Our Services</a></li>
+                                                        <li><a href="{{ route('login') }}">Hindu</a></li>
+                                                        <li><a href="{{ route('login') }}">Muslim</a></li>
+                                                        <li><a href="{{ route('login') }}">Christian</a></li>
+                                                        <li><a href="{{ route('login') }}">Sikh</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="multi-col">
                                                 <div class="inn">
-                                                    <h4>Page sets 2</h4>
                                                     <ul>
-                                                        <li><a href="plans.html">Pricing plans</a></li>
-                                                        <li><a href="login.html">Login</a></li>
-                                                        <li><a href="sign-up.html">Sign-up</a></li>
-                                                        <li><a href="photo-gallery.html">Photo gallery</a></li>
-                                                        <li><a href="photo-gallery-1.html">Photo gallery 1</a></li>
+                                                        <li><a href="{{ route('login') }}">Parsi</a></li>
+                                                        <li><a href="{{ route('login') }}">Jain</a></li>
+                                                        <li><a href="{{ route('login') }}">Buddhist</a></li>
+                                                        <li><a href="{{ route('login') }}">Jewish</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="multi-col">
                                                 <div class="inn">
-                                                    <h4>Page sets 3</h4>
                                                     <ul>
-                                                        <li><a href="contact.html">Contact</a></li>
-                                                        <li><a href="about.html">About</a></li>
-                                                        <li><a href="blog.html">Blog</a></li>
-                                                        <li><a href="blog-detail.html">Blog detail</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="multi-col">
-                                                <div class="inn">
-                                                    <h4>Page sets 4</h4>
-                                                    <ul>
-                                                        <li><a href="enquiry.html">Ask your doubts</a></li>
-                                                        <li><a href="make-reservation.html">Make Reservation</a></li>
-                                                        <li><a href="faq.html">FAQ</a></li>
-                                                        <li><a href="coming-soon.html" target="_blank">Coming soon</a>
-                                                        </li>
-                                                        <li><a href="404.html">404</a></li>
+                                                        <li><a href="{{ route('login') }}">No Religion</a></li>
+                                                        <li><a href="{{ route('login') }}">Spiritual</a></li>
+                                                        <li><a href="{{ route('login') }}">Other</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -82,7 +63,6 @@
                             <li><a href="{{ route('about') }}">About</a></li>
                         </ul>
                     </div>
-
                     <!-- USER PROFILE -->
                     <div class="head-pro d-flex align-items-center">
                         <img src="images/profiles/1.jpg" alt="" loading="lazy" class="me-2 rounded-circle"
@@ -92,14 +72,13 @@
                         </h4>
                     </div>
 
-
                 </div>
 
                 <!--MOBILE MENU-->
                 <div class="mob-menu">
                     <div class="mob-me-ic">
-                        <span class="mobile-menu" data-mob="mobile">
-                            <img src="images/icon/menu.svg" alt="">
+                        <span class="mobile-menu">
+                            <li><a href="{{ route('login') }}">Login</a></li>
                         </span>
                     </div>
                 </div>
@@ -115,14 +94,8 @@
         <div class="mob-me-clo"><img src="images/icon/close.svg" alt=""></div>
         <div class="mv-bus">
             <ul>
-                <li><a href="all-profiles.html">All profiles</a></li>
-                <li><a href="profile-details.html">Profile details</a></li>
-                <li><a href="wedding.html">Wedding</a></li>
-                <li><a href="wedding-video.html">Wedding video</a></li>
-                <li><a href="services.html">Our Services</a></li>
-                <li><a href="plans.html">Pricing plans</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="sign-up.html">Sign-up</a></li>
+
+                {{-- <li><a href="{{ route('about') }}">Sign-up</a></li> --}}
             </ul>
         </div>
     </div>

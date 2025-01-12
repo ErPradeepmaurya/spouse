@@ -18,14 +18,18 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('');
+// });
 
 
+Route::get('/', [UserController::class, 'index'])->name('index');
 Route::get('/login', [UserController::class, 'getlogin'])->name('login');
 Route::get('/sign-up', [UserController::class, 'getsignup'])->name('sign-up');
+Route::post('/store-sign-up', [UserController::class, 'storeSignup'])->name('store.sign-up');
 Route::get('/about', [UserController::class, 'getabout'])->name('about');
+Route::get('/contact', [UserController::class, 'getcontact'])->name('contact');
+Route::post('/store-contact', [UserController::class, 'storeContact'])->name('store.contact');
 
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');

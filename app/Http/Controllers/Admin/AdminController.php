@@ -256,6 +256,7 @@ class AdminController extends Controller
     {
         // Validate the form data
         $validatedData = $request->validate([
+            'profile_name' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|numeric',
@@ -295,6 +296,7 @@ class AdminController extends Controller
 
         // Save data to the database
         $user = new AddNewUser();
+        $user->profile_name = $validatedData['profile_name'];
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
         $user->phone = $validatedData['phone'];

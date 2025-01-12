@@ -28,6 +28,41 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
+                                            <label class="lb">Profile:</label>
+                                            <select class="form-select chosen-select" name="profile_name">
+                                                <option value="" disabled
+                                                    {{ old('profile_name') == '' ? 'selected' : '' }}>
+                                                    Select Profile
+                                                </option>
+                                                <option value="MySelf"
+                                                    {{ old('profile_name') == 'MySelf' ? 'selected' : '' }}>Myself</option>
+                                                <option value="My Son"
+                                                    {{ old('profile_name') == 'My Son' ? 'selected' : '' }}>My Son</option>
+                                                <option value="My Daughter"
+                                                    {{ old('profile_name') == 'My Daughter' ? 'selected' : '' }}>My Daughter
+                                                </option>
+                                                <option value="My Brother"
+                                                    {{ old('profile_name') == 'My Brother' ? 'selected' : '' }}>My Brother
+                                                </option>
+                                                <option value="My Sister"
+                                                    {{ old('profile_name') == 'My Sister' ? 'selected' : '' }}>My Sister
+                                                </option>
+                                                <option value="My Friend"
+                                                    {{ old('profile_name') == 'My Friend' ? 'selected' : '' }}>My Friend
+                                                </option>
+                                                <option value="My Relative"
+                                                    {{ old('profile_name') == 'My Relative' ? 'selected' : '' }}>My Relative
+                                                </option>
+                                            </select>
+
+                                            @error('profile_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
                                             <label class="lb">Name:</label>
                                             <input type="text" class="form-control" placeholder="Enter your full name"
                                                 name="name" value="{{ old('name') }}">
@@ -70,7 +105,8 @@
                                         <div class="form-group">
                                             <label class="lb">Gender:</label>
                                             <select class="form-select chosen-select" name="gender">
-                                                <option value="" disabled {{ old('gender') == '' ? 'selected' : '' }}>
+                                                <option value="" disabled
+                                                    {{ old('gender') == '' ? 'selected' : '' }}>
                                                     Select</option>
                                                 <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male
                                                 </option>

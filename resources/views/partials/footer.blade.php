@@ -10,15 +10,15 @@
             <div class="col-md-4">
                 <h4>Get In Touch</h4>
                 <p>Address: 3812 Lena Lane City Jackson Mississippi</p>
-                <p>Phone: <a href="tel:+917904462944">+92 (8800) 68 - 8960</a></p>
+                <p>Phone: <a href="tel:+01 0000000000">+91 0000000000</a></p>
                 <p>Email: <a href="mailto:info@example.com">info@example.com</a></p>
             </div>
             <div class="col-md-4">
                 <h4>HELP &amp; SUPPORT</h4>
                 <ul>
-                    <li><a href="about-us.html">About company</a>
+                    <li><a href="{{ route('about') }}">About company</a>
                     </li>
-                    <li><a href="#!">Contact us</a>
+                    <li><a href="{{ route('contact') }}">Contact us</a>
                     </li>
                 </ul>
             </div>
@@ -41,7 +41,7 @@
     <div class="cr">
         <div class="container">
             <div class="row">
-                <p>Copyright © <span id="cry">2023</span> <a href="#!" target="_blank">Company.com</a>
+                <p>Copyright © <span id="cry">2025</span> <a href="#!" target="_blank">Itwedream</a>
                     All rights reserved.</p>
             </div>
         </div>
@@ -61,47 +61,7 @@
 <!-- SweetAlert2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Toastr JS -->
-{{-- <script>
-    @if (Session::has('message'))
-        var type = "{{ Session::get('alert-type', 'info') }}"
-        switch (type) {
-            case 'info':
-
-                toastr.options.timeOut = 10000;
-                toastr.info("{{ Session::get('message') }}");
-                var audio = new Audio('audio.mp3');
-                audio.play();
-                break;
-            case 'success':
-
-                toastr.options.timeOut = 10000;
-                toastr.success("{{ Session::get('message') }}");
-                var audio = new Audio('audio.mp3');
-                audio.play();
-
-                break;
-            case 'warning':
-
-                toastr.options.timeOut = 10000;
-                toastr.warning("{{ Session::get('message') }}");
-                var audio = new Audio('audio.mp3');
-                audio.play();
-
-                break;
-            case 'error':
-
-                toastr.options.timeOut = 10000;
-                toastr.error("{{ Session::get('message') }}");
-                var audio = new Audio('audio.mp3');
-                audio.play();
-
-                break;
-        }
-    @endif
-</script> --}}
-
 <script>
-    // Display success or error messages with Toastr
     @if (session('success'))
         toastr.success('{{ session('success') }}');
     @endif
@@ -110,7 +70,6 @@
         toastr.error('{{ session('error') }}');
     @endif
 
-    // Customize Toastr options (optional)
     toastr.options = {
         "closeButton": true,
         "progressBar": true,
@@ -118,37 +77,3 @@
         "timeOut": "3000"
     };
 </script>
-
-
-{{-- <script>
-    @if (session('success'))
-        Swal.fire({
-            title: 'Success!',
-            text: '{{ session('success') }}',
-            icon: 'success',
-            confirmButtonText: 'OK',
-            timer: 3000, // Auto close after 3 seconds
-            timerProgressBar: true
-        });
-    @endif
-
-    @if (session('error'))
-        Swal.fire({
-            title: 'Error!',
-            text: '{{ session('error') }}',
-            icon: 'error',
-            confirmButtonText: 'Try Again'
-        });
-    @endif
-</script>
-
-<script>
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Welcome back!',
-        text: 'Login successful!',
-        showConfirmButton: false,
-        timer: 3000
-    });
-</script> --}}
