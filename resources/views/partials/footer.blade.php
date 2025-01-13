@@ -56,6 +56,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/select-opt.js"></script>
 <script src="js/slick.js"></script>
+<script src="js/Chart.js"></script>
 <script src="js/custom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <!-- SweetAlert2 JS -->

@@ -7,7 +7,7 @@
         <div class="login">
             <div class="container">
                 <div class="d-flex justify-content-center align-items-center">
-                    <div class="row shadow-lg p-4 rounded bg-white w-auto">
+                    <div class="shadow-lg p-4 rounded bg-white">
                         <div class="form-tit text-center">
                             <h1>Sign up to Matrimony</h1>
                             <p>Already a member? <a href="{{ route('login') }}">Login</a></p>
@@ -43,6 +43,8 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="form-group col-sm-6">
                                         <label class="lb">Full Name:</label>
                                         <input type="text" class="form-control" placeholder="Enter your full name"
@@ -60,6 +62,8 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="form-group col-sm-6">
                                         <label class="lb">Email:</label>
                                         <input type="email" class="form-control" id="email" placeholder="Enter email"
@@ -76,6 +80,8 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="form-group col-sm-6">
                                         <label class="lb">Password:</label>
                                         <input type="password" class="form-control" id="pwd"

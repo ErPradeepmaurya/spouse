@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AddNewUser;
 use App\Models\Contact;
+use Illuminate\Database\QueryException;
+use App\Mail\EmailConfirmation;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+
 
 class UserController extends Controller
 {
@@ -21,10 +26,15 @@ class UserController extends Controller
     {
         return view('sign-up');
     }
+    public function getDashboard()
+    {
+        return view('dashboard');
+    }
 
     public function storeSignup(Request $request)
     {
         // Validate the form data
+        // dd($request->all());
         $validatedData = $request->validate([
             'profile_name' => 'required|string|max:255',
             'gender' => 'required|string',
@@ -65,47 +75,75 @@ class UserController extends Controller
         ]);
 
         // Save data to the database
-        $user = new AddNewUser();
-        $user->profile_name = $validatedData['profile_name'];
-        $user->gender = $validatedData['gender'];
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-        $user->dob = $validatedData['dob'] ?? null;
-        $user->phone = $validatedData['phone'];
-        $user->password = bcrypt($validatedData['password']);
-        // $user->age = $validatedData['age'] ?? null;
-        // $user->height = $validatedData['height'] ?? null;
-        // $user->weight = $validatedData['weight'] ?? null;
-        // $user->fathers_name = $validatedData['fathers_name'] ?? null;
-        // $user->fathers_job = $validatedData['fathers_job'] ?? null;
-        // $user->mothers_name = $validatedData['mothers_name'] ?? null;
-        // $user->mothers_job = $validatedData['mothers_job'] ?? null;
-        // $user->total_family = $validatedData['total_family'] ?? null;
-        // $user->total_brother = $validatedData['total_brother'] ?? null;
-        // $user->total_sister = $validatedData['total_sister'] ?? null;
-        // $user->country = $validatedData['country'] ?? null;
-        // $user->state = $validatedData['state'] ?? null;
-        // $user->city = $validatedData['city'] ?? null;
-        // $user->pin_code = $validatedData['pin_code'] ?? null;
-        // $user->address = $validatedData['address'] ?? null;
-        // $user->job_type = $validatedData['job_type'] ?? null;
-        // $user->company_name = $validatedData['company_name'] ?? null;
-        // $user->salary = $validatedData['salary'] ?? null;
-        // $user->experience = $validatedData['experience'] ?? null;
-        // $user->degree = $validatedData['degree'] ?? null;
-        // $user->college = $validatedData['college'] ?? null;
-        // $user->school = $validatedData['school'] ?? null;
-        // $user->hobbies = $validatedData['hobbies'] ?? null;
-        // $user->whatsapp = $validatedData['whatsapp'] ?? null;
-        // $user->facebook = $validatedData['facebook'] ?? null;
-        // $user->instagram = $validatedData['instagram'] ?? null;
-        // $user->x = $validatedData['x'] ?? null;
-        // $user->youtube = $validatedData['youtube'] ?? null;
-        // $user->linkedin = $validatedData['linkedin'] ?? null;
-        $user->save();
+        try {
+            $user = new AddNewUser();
+            $user->profile_name = $validatedData['profile_name'];
+            $user->gender = $validatedData['gender'];
+            $user->name = $validatedData['name'];
+            $user->email = $validatedData['email'];
+            // $user->email_token = Str::random(40);
+            $user->dob = $validatedData['dob'] ?? null;
+            $user->phone = $validatedData['phone'];
+            $user->password = bcrypt($validatedData['password']);
+            // $user->age = $validatedData['age'] ?? null;
+            // $user->height = $validatedData['height'] ?? null;
+            // $user->weight = $validatedData['weight'] ?? null;
+            // $user->fathers_name = $validatedData['fathers_name'] ?? null;
+            // $user->fathers_job = $validatedData['fathers_job'] ?? null;
+            // $user->mothers_name = $validatedData['mothers_name'] ?? null;
+            // $user->mothers_job = $validatedData['mothers_job'] ?? null;
+            // $user->total_family = $validatedData['total_family'] ?? null;
+            // $user->total_brother = $validatedData['total_brother'] ?? null;
+            // $user->total_sister = $validatedData['total_sister'] ?? null;
+            // $user->country = $validatedData['country'] ?? null;
+            // $user->state = $validatedData['state'] ?? null;
+            // $user->city = $validatedData['city'] ?? null;
+            // $user->pin_code = $validatedData['pin_code'] ?? null;
+            // $user->address = $validatedData['address'] ?? null;
+            // $user->job_type = $validatedData['job_type'] ?? null;
+            // $user->company_name = $validatedData['company_name'] ?? null;
+            // $user->salary = $validatedData['salary'] ?? null;
+            // $user->experience = $validatedData['experience'] ?? null;
+            // $user->degree = $validatedData['degree'] ?? null;
+            // $user->college = $validatedData['college'] ?? null;
+            // $user->school = $validatedData['school'] ?? null;
+            // $user->hobbies = $validatedData['hobbies'] ?? null;
+            // $user->whatsapp = $validatedData['whatsapp'] ?? null;
+            // $user->facebook = $validatedData['facebook'] ?? null;
+            // $user->instagram = $validatedData['instagram'] ?? null;
+            // $user->x = $validatedData['x'] ?? null;
+            // $user->youtube = $validatedData['youtube'] ?? null;
+            // $user->linkedin = $validatedData['linkedin'] ?? null;
+            $user->save();
+            // $details = [
+            //     'name' => $user->name,
+            //     'confirmation_link' => route('email.confirmation', ['token' => $user->email_token]),
+            // ];
 
-        return redirect()->route('login')->with('success', 'User added successfully!');
+            // Mail::to($user->email)->send(new EmailConfirmation($details));
+
+            return redirect()->route('login')->with('success', 'User added successfully!');
+        } catch (QueryException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                return back()->withErrors(['email' => 'The email address is already registered.'])->withInput();
+            }
+        }
     }
+
+    // public function confirmEmail($token)
+    // {
+    //     $user = AddNewUser::where('email_token', $token)->first();
+
+    //     if (!$user) {
+    //         return redirect()->route('login')->with('error', 'Invalid confirmation token.');
+    //     }
+
+    //     $user->email_verified_at = now();
+    //     $user->email_token = null;
+    //     $user->save();
+
+    //     return redirect()->route('login')->with('success', 'Email confirmed successfully!');
+    // }
 
     public function getabout()
     {

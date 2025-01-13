@@ -13,6 +13,7 @@ class AddNewUser extends Model
 
         'name',
         'email',
+        'email_token',
         'phone',
         'password',
         'gender',
