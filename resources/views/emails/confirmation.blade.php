@@ -9,9 +9,9 @@
 
 <body>
     <h1>Email Confirmation</h1>
-    <p>Dear {{ $details['name'] }},</p>
+    {{-- <p>Dear {{ $details['name'] }},</p> --}}
     <p>Thank you for signing up! Please confirm your email address by clicking the link below:</p>
-    <a href="{{ $details['confirmation_link'] }}">Confirm Email</a>
+    <a href="{{ $link }}">Verify Email</a>
 </body>
 
 </html>

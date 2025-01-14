@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Client extends Model
+// class Client extends Model 
+class Client extends Authenticatable implements AuthenticatableContract
 {
     use HasFactory;
 
-    protected $table = 'clients'; 
+    protected $table = 'clients';
 
     protected $fillable = [
         'name',
@@ -36,5 +39,10 @@ class Client extends Model
         'twitter',
         'youtube',
         'linkedin'
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 }

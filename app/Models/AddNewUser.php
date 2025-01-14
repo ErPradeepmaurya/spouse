@@ -10,10 +10,11 @@ class AddNewUser extends Model
     use HasFactory;
     protected $table = 'add_new_user';
     protected $fillable = [
-
         'name',
         'email',
-        'email_token',
+        'email_verification_token',
+        'is_verified',
+        'create_ac_type',
         'phone',
         'password',
         'gender',

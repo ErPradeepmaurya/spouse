@@ -2,7 +2,6 @@
 @section('title', 'Home Page')
 @section('content')
 
-
     <section>
         <div class="db">
             <div class="container">

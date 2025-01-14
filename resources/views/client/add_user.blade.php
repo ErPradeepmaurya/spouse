@@ -1,5 +1,5 @@
-@extends('admin.adminLayout.app')
-@section('title', 'Home Page')
+@extends('client.clientLayout.app')
+@section('title', 'Add New User')
 @section('content')
     <div class="pan-rhs">
         <div class="row main-head">
@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-8">
                 <nav aria-label="breadcrumb" class="d-flex justify-content-end">
-                    <a href="{{ route('admin.clientlist') }}" class="cta cta-grn">Back</a>
+                    <a href="{{ route('client.userlist') }}" class="cta cta-grn">Back</a>
                 </nav>
             </div>
         </div>
@@ -18,7 +18,7 @@
             <div class="col-md-12">
                 <div class="box-com box-qui box-lig box-form">
                     <div class="form-inp">
-                        <form action="{{ route('admin.store_user') }}" method="POST">
+                        <form action="{{ route('client.store_user') }}" method="POST">
                             @csrf
                             <!--PROFILE BIO-->
                             <div class="edit-pro-parti">
@@ -27,8 +27,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-3">
+                                        <input type="hidden" name="create_ac_type" value="client">
                                         <div class="form-group">
-                                            <input type="hidden" name="create_ac_type" value="admin">
                                             <label class="lb">Profile:</label>
                                             <select class="form-select chosen-select" name="profile_name">
                                                 <option value="" disabled

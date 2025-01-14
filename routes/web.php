@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Client\ClientAuthController;
+use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\UserController;
 
 
@@ -17,11 +19,6 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('');
-// });
-
 
 Route::get('/', [UserController::class, 'index'])->name('index');
 Route::get('/login', [UserController::class, 'getlogin'])->name('login');
@@ -52,5 +49,20 @@ Route::prefix('admin')->group(function () {
         Route::post('/store-user', [AdminController::class, 'storeUser'])->name('admin.store_user');
 
         Route::get('/user-list', [AdminController::class, 'userlist'])->name('admin.userlist');
+    });
+});
+
+Route::prefix('client')->group(function () {
+    Route::get('/login', [ClientAuthController::class, 'showClientLoginForm'])->name('client.login');
+    Route::post('/login', [ClientAuthController::class, 'clientLogin'])->name('client.login.submit');
+    Route::post('/logout', [ClientAuthController::class, 'clientLogout'])->name('client.logout');
+
+    Route::middleware('auth:client')->group(function () {
+        Route::get('/dashboard', [ClientController::class, 'clientDashboard'])->name('client.dashboard');
+        Route::get('/change-password', [ClientController::class, 'changepassword'])->name('client.changepassword');
+        Route::post('/change-password', [ClientController::class, 'updatePassword'])->name('client.updatePassword');
+        Route::get('/add-user', [ClientController::class, 'createUser'])->name('client.add_user');
+        Route::post('/store-user', [ClientController::class, 'storeUser'])->name('client.store_user');
+        Route::get('/user-list', [ClientController::class, 'userlist'])->name('client.userlist');
     });
 });
